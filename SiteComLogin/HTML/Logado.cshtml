@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+
+    //Variavel de controle
+    Boolean logado = false;
+
+    //Cria o obj cookie e recebe o mesmo pelo obj Request
+
+    HttpCookie cookie = Request.Cookies["UserLogin"];
+
+    if (cookie != null)
+    {
+        logado = true;
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/CSS/style.css">
+    <script src="~/JavaScript/JavaScript.js"></script>
+    <title></title>
+</head>
+<body>
+    @if (logado)
+    {
+        <h1>Você está Logado</h1>
+        //Imprime o valor do cookie
+        //cookie.Value.ToString();
+        <p>Seu nível de permissão é: @cookie.Value.ToString()</p>
+        <br />
+        <br />
+        <button onclick="LogOff()">Click para Desconectar</button>
+    }
+    else {
+        <h1> Algo deu ERRADO </h1 >
+    }
+
+</body>
+</html>

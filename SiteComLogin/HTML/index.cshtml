@@ -1,0 +1,33 @@
+﻿<!--Iniciando o arquivo CSHTML-->
+<!--Logo abaixo um exemplo de bloco de código C# inserido no arquivo -->
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="~/CSS/style.css">
+    <title>Meu primeiro site autenticado</title>
+</head>
+<body>
+    <div>
+        <h1>Bem vindo ao meu site! </h1>
+        <!--Sempre que precisar inserir códigos C# no meio do HTML é só inserir um "ARROBA"-->
+        <p>Estamos em @DateTime.Today.ToLongDateString() .</p>
+        <p>Realize o Login para proceguir</p>
+        <form method="post" action="~/HTML/validaLogin.cshtml">
+            Usuário: 
+            <input type="text" name="email" placeholder="user=admin@senai.com" maxlength="30"/>
+            <br>
+            Senha: 
+            <input type="password" name="senha"/>
+            <br>
+            <input type="submit" value="Login"/>
+        </form>
+        <p><a href="~/HTML/Logado.cshtml">Verifique se está logado!!</a></p>
+    </div>
+</body>
+</html>

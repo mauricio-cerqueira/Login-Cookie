@@ -1,0 +1,56 @@
+﻿<!--Importar as Classes que serão utilizadas-->
+@using SiteComLogin.Classes
+
+<!--Códgo C# inicial-->
+@{
+    Layout = null;
+
+    //Conecta com o BD
+    BancoDeDados.DBConnect();
+
+    //Criar um objeto pessoa
+    Usuario usuario = new Usuario();
+
+    //Buscar os dados do formulario pelo método POST e inserir no objeto cliente
+    usuario.email = Request.Form["email"];
+    usuario.senha = Request.Form["senha"];
+
+    if (BancoDeDados.Login(usuario.email, usuario.senha))
+    {
+        //Cria a estancia do obj HttpCookie passando o nome do mesmo
+
+        HttpCookie cookie = new HttpCookie("UserLogin");
+
+        //Define o valor do cookie
+
+        cookie.Value = "admin";
+
+        //Time para expiração (10 min)
+
+        DateTime dtNow = DateTime.Now;
+
+        TimeSpan tsMinute = new TimeSpan(0, 0, 10, 0);
+
+        cookie.Expires = dtNow + tsMinute;
+
+        //Adiciona o cookie
+
+        Response.Cookies.Add(cookie);
+
+        //Redireciona o usuário para a área de logado
+        <text>
+            <script>
+                window.location.href = "./Logado.cshtml";
+            </script>
+        </text>
+    }
+    else
+    {
+        //Redireciona o usuário para a pagina inicial
+        <text>
+            <script>
+                window.location.href = "./index.cshtml";
+            </script>
+        </text>
+    }
+}
